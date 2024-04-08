@@ -57,7 +57,11 @@
 			<artifactId>spring-kafka-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+        </dependency>
+    </dependencies>
 
 	<build>
 		<plugins>
@@ -95,11 +99,11 @@
 			</plugin>
 		</plugins>
 	</build>
-	<repositories>
+	<!--<repositories>
 		<repository>
 			<id/>
 			<url>https://repo.maven.apache.org/maven2/</url>
 		</repository>
-	</repositories>
+	</repositories>-->
 
 </project>

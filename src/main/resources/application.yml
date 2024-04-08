@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: demo-avro-springboot
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    topic:
+      name: test-local-avro-topic
+    consumer: local-avro
+
