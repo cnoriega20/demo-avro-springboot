@@ -1,7 +1,12 @@
 package com.tn.demoavro.s.service;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.avro.Schema;
+import org.apache.avro.generic.GenericData;
+import org.apache.avro.generic.GenericRecord;
+import org.apache.avro.util.Utf8;
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,19 +24,41 @@ public class KafkaProducerService {
     private String topicName;
 
     private final KafkaTemplate<String, String> kafkaTemplate;
+    private final ObjectMapper objectMapper; // Jackson ObjectMapper for serialization
 
-    public KafkaProducerService(KafkaTemplate<String, String> kafkaTemplate) {
+
+    public KafkaProducerService(KafkaTemplate<String, String> kafkaTemplate, ObjectMapper objectMapper) {
         this.kafkaTemplate = kafkaTemplate;
+        this.objectMapper = objectMapper;
     }
 
-    public CompletableFuture<RecordMetadata> sendMessage(String message){
+    public CompletableFuture<RecordMetadata> sendMessage(com.tn.demoavro.s.avro.model.Student message){
         return CompletableFuture.supplyAsync(() -> {
-            try{
-                //Send message asynchronously
-                return kafkaTemplate.send(topicName, message).get().getRecordMetadata();
-            } catch(Exception e){
+            try {
+                // Convert Student to GenericRecord
+                GenericRecord genericRecord = convertStudentToGenericRecord(message);// Convert Student to GenericRecord
+
+                // Serialize GenericRecord to JSON string
+                String jsonMessage = objectMapper.writeValueAsString(genericRecord);
+
+                // Send message asynchronously
+                return kafkaTemplate.send(topicName, jsonMessage).get().getRecordMetadata();
+            } catch (Exception e) {
                 throw new RuntimeException("Failed to send message to Kafka", e);
             }
         });
+    }
+
+    private GenericRecord convertStudentToGenericRecord(com.tn.demoavro.s.avro.model.Student message){
+        Schema schema = com.tn.demoavro.s.avro.model.Student.getClassSchema();
+
+        // Create a new GenericRecord instance using the schema
+        GenericRecord genericRecord = new GenericData.Record(schema);
+
+        //  Set values for each field in the GenericRecord
+        genericRecord.put("studentName", new Utf8(message.getStudentName().toString()));
+        genericRecord.put("studentId", new Utf8(message.getStudentId().toString()));
+        genericRecord.put("age", message.getAge());
+        return genericRecord;
     }
 }
