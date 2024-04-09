@@ -20,15 +20,16 @@ import java.util.concurrent.CompletableFuture;
 @Service
 @Slf4j
 public class KafkaProducerService {
-    @Value("${kafka.topic.name}")
+    @Value("${spring.kafka.topic.name}")
     private String topicName;
 
-    private final KafkaTemplate<String, String> kafkaTemplate;
+    @Autowired
+    private KafkaTemplate<String, String> kafkaTemplate;
     private final ObjectMapper objectMapper; // Jackson ObjectMapper for serialization
 
 
-    public KafkaProducerService(KafkaTemplate<String, String> kafkaTemplate, ObjectMapper objectMapper) {
-        this.kafkaTemplate = kafkaTemplate;
+    public KafkaProducerService(ObjectMapper objectMapper) {
+
         this.objectMapper = objectMapper;
     }
 
