@@ -29,7 +29,8 @@ public class AvroDeserializer<T extends SpecificRecordBase> implements Deseriali
     public T deserialize(String topic, byte[] bytes) {
         T returnObject = null;
         try{
-            if(bytes != null) {
+            if(bytes != null && bytes.length > 0) {
+                log.info("Received {} bytes for deserialization", bytes.length);
                 Constructor<T> constructor = targetType.getConstructor();
                 T recordInstance =  constructor.newInstance();
 
@@ -37,6 +38,8 @@ public class AvroDeserializer<T extends SpecificRecordBase> implements Deseriali
                 Decoder decoder = DecoderFactory.get().binaryDecoder(bytes, null);
                 returnObject = (T) datumReader.read(null, decoder);
                 log.info("Deserialized data={}",returnObject.toString());
+            } else {
+                log.warn("Received empty or null byte array for deserialization");
             }
         }catch (Exception e){
             log.error("Unable to deserialize bytes[] ", e);
