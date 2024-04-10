@@ -24,7 +24,7 @@ public class KafkaProducerService {
     private String topicName;
 
     @Autowired
-    private KafkaTemplate<String, String> kafkaTemplate;
+    private KafkaTemplate<String, com.tn.demoavro.s.avro.model.Student> kafkaTemplate;
     private final ObjectMapper objectMapper; // Jackson ObjectMapper for serialization
 
 
@@ -36,21 +36,24 @@ public class KafkaProducerService {
     public CompletableFuture<RecordMetadata> sendMessage(com.tn.demoavro.s.avro.model.Student message){
         return CompletableFuture.supplyAsync(() -> {
             try {
-                // Convert Student to GenericRecord
+                /*// Convert Student to GenericRecord
                 GenericRecord genericRecord = convertStudentToGenericRecord(message);// Convert Student to GenericRecord
 
                 // Serialize GenericRecord to JSON string
-                String jsonMessage = objectMapper.writeValueAsString(genericRecord);
+                String jsonMessage = objectMapper.writeValueAsString(genericRecord);*/
+
+                //Log the contents of the Student object
+                log.info("Sending message to Kafka: {}", message);
 
                 // Send message asynchronously
-                return kafkaTemplate.send(topicName, jsonMessage).get().getRecordMetadata();
+                return kafkaTemplate.send(topicName, message).get().getRecordMetadata();
             } catch (Exception e) {
                 throw new RuntimeException("Failed to send message to Kafka", e);
             }
         });
     }
 
-    private GenericRecord convertStudentToGenericRecord(com.tn.demoavro.s.avro.model.Student message){
+    /*private GenericRecord convertStudentToGenericRecord(com.tn.demoavro.s.avro.model.Student message){
         Schema schema = com.tn.demoavro.s.avro.model.Student.getClassSchema();
 
         // Create a new GenericRecord instance using the schema
@@ -61,5 +64,5 @@ public class KafkaProducerService {
         genericRecord.put("studentId", new Utf8(message.getStudentId().toString()));
         genericRecord.put("age", message.getAge());
         return genericRecord;
-    }
+    }*/
 }
