@@ -32,7 +32,7 @@ public class AvroSerializer<T extends SpecificRecordBase> implements Serializer<
         }catch(Exception e) {
             log.error("Unable to serialize payload", e);
         }
-        return new byte[0];
+        return bytes;
     }
     @Override
     public void close() {
