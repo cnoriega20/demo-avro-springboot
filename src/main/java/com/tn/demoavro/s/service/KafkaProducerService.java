@@ -3,7 +3,6 @@ package com.tn.demoavro.s.service;
 import com.tn.demoavro.s.mappers.StudentMapper;
 import com.tn.demoavro.s.model.Student;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
@@ -20,7 +19,7 @@ public class KafkaProducerService {
     private final KafkaTemplate<String, Student> kafkaTemplate;
     private final StudentMapper studentMapper;
 
-    public KafkaProducerService(@Qualifier("studentKafkaTemplate")KafkaTemplate<String, Student> kafkaTemplate, StudentMapper studentMapper) {
+    public KafkaProducerService(KafkaTemplate<String, Student> kafkaTemplate, StudentMapper studentMapper) {
         this.kafkaTemplate = kafkaTemplate;
         this.studentMapper = studentMapper;
 
