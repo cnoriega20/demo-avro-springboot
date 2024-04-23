@@ -10,10 +10,12 @@ public interface StudentMapper {
     @Mapping(source = "studentName", target = "studentName", qualifiedByName = "charSequenceToString" )
     @Mapping(source = "studentId", target = "studentId", qualifiedByName = "charSequenceToString")
     @Mapping(source = "age", target = "age")
-    Student  convertAvroToStudent(com.tn.demoavro.s.avro.model.Student student);
+    Student  convertAvroToStudent(com.tn.springboot.kafka.model.Student student);
 
     @Named("charSequenceToString")
     default String map(CharSequence value) {
         return value != null ? value.toString() : null;
     }
+
+    com.tn.springboot.kafka.model.Student convertStudentToAvro(Student student);
 }

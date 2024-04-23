@@ -5,7 +5,7 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
-import com.tn.demoavro.s.avro.model.Student;
+import com.tn.springboot.kafka.model.Student;
 
 @Service
 @Slf4j

@@ -12,7 +12,7 @@ import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 
-import com.tn.demoavro.s.avro.model.Student;
+import com.tn.springboot.kafka.model.Student;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,7 +38,7 @@ public class KafkaConsumerConfig {
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, com.tn.demoavro.s.avro.model.Student>
+    public ConcurrentKafkaListenerContainerFactory<String, com.tn.springboot.kafka.model.Student>
             kafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, Student> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();

@@ -1,5 +1,5 @@
 {
-  "namespace": "com.tn.demoavro.s.avro.model",
+  "namespace": "com.tn.springboot.kafka.model",
   "type": "record",
   "name": "Student",
   "fields": [

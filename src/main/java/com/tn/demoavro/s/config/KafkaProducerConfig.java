@@ -10,7 +10,7 @@ import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 
-import com.tn.demoavro.s.avro.model.Student;
+import com.tn.springboot.kafka.model.Student;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,7 +30,7 @@ public class KafkaProducerConfig {
 
     }
 
-    @Bean
+    @Bean(name = "studentKafkaTemplate")
     public KafkaTemplate<String, Student> kafkaTemplate(){
         return new KafkaTemplate<>(producerFactory());
     }
