@@ -16,10 +16,10 @@ public class KafkaProducerService {
     private String topicName;
 
 
-    private final KafkaTemplate<String, Student> kafkaTemplate;
+    private final KafkaTemplate<String, com.tn.springboot.kafka.model.Student> kafkaTemplate;
     private final StudentMapper studentMapper;
 
-    public KafkaProducerService(KafkaTemplate<String, Student> kafkaTemplate, StudentMapper studentMapper) {
+    public KafkaProducerService(KafkaTemplate<String, com.tn.springboot.kafka.model.Student> kafkaTemplate, StudentMapper studentMapper) {
         this.kafkaTemplate = kafkaTemplate;
         this.studentMapper = studentMapper;
 
@@ -36,7 +36,7 @@ public class KafkaProducerService {
                 log.info("Sending message to Kafka: {}", pojoStudent);
 
                 // Send message asynchronously
-                kafkaTemplate.send(topicName, pojoStudent).get();
+                kafkaTemplate.send(topicName, avroStudent).get();
                 return "Success";
             } catch (Exception e) {
                 throw new RuntimeException("Failed to send message to Kafka", e);

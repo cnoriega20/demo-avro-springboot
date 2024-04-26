@@ -10,7 +10,7 @@ import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 
-import com.tn.springboot.kafka.model.Student;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +21,7 @@ public class KafkaProducerConfig {
     private  String bootstrapAddress;
 
     @Bean
-    public ProducerFactory<String, Student> producerFactory(){
+    public ProducerFactory<String, com.tn.springboot.kafka.model.Student> producerFactory(){
         Map<String, Object> configProps  = new HashMap<>();
         configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
         configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -30,8 +30,8 @@ public class KafkaProducerConfig {
 
     }
 
-    @Bean(name = "studentKafkaTemplate")
-    public KafkaTemplate<String, Student> kafkaTemplate(){
+    @Bean
+    public KafkaTemplate<String, com.tn.springboot.kafka.model.Student> kafkaTemplate(){
         return new KafkaTemplate<>(producerFactory());
     }
 }
