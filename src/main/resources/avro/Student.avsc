@@ -1,7 +1,7 @@
 {
-  "namespace": "com.tn.springboot.kafka.model",
+  "namespace": "com.tn.demoavro.s.generated",
   "type": "record",
-  "name": "Student",
+  "name": "AvroStudent",
   "fields": [
     {
       "name": "studentName",

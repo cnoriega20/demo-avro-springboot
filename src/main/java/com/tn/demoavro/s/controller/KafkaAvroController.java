@@ -1,5 +1,8 @@
+
 package com.tn.demoavro.s.controller;
 
+
+import com.tn.demoavro.s.generated.AvroStudent;
 import com.tn.demoavro.s.mappers.StudentMapper;
 import com.tn.demoavro.s.model.Student;
 import com.tn.demoavro.s.service.KafkaProducerService;
@@ -23,9 +26,10 @@ public class KafkaAvroController {
 
     @PostMapping(value = "/send")
     public CompletableFuture<String> kafkaMessage(@RequestBody Student message) {
-        com.tn.springboot.kafka.model.Student avroStudent = studentMapper.convertStudentToAvro(message);
+        AvroStudent avroStudent = studentMapper.convertStudentToAvro(message);
         return kafkaProducerService.sendMessage(avroStudent);
 
     }
 
 }
+

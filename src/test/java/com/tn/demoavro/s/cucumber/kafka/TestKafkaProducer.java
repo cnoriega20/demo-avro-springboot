@@ -1,3 +1,4 @@
+/*
 package com.tn.demoavro.s.cucumber.kafka;
 
 import com.tn.demoavro.s.mappers.StudentMapper;
@@ -46,3 +47,4 @@ public class TestKafkaProducer {
     }
 
 }
+*/

@@ -1,5 +1,6 @@
 package com.tn.demoavro.s.config;
 
+import com.tn.demoavro.s.generated.AvroStudent;
 import com.tn.demoavro.s.serializer.AvroSerializer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -21,7 +22,7 @@ public class KafkaProducerConfig {
     private  String bootstrapAddress;
 
     @Bean
-    public ProducerFactory<String, com.tn.springboot.kafka.model.Student> producerFactory(){
+    public ProducerFactory<String, AvroStudent> producerFactory(){
         Map<String, Object> configProps  = new HashMap<>();
         configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
         configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -31,7 +32,7 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public KafkaTemplate<String, com.tn.springboot.kafka.model.Student> kafkaTemplate(){
+    public KafkaTemplate<String, AvroStudent> kafkaTemplate(){
         return new KafkaTemplate<>(producerFactory());
     }
 }

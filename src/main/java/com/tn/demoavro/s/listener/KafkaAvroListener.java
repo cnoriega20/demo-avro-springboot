@@ -5,13 +5,13 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
-import com.tn.springboot.kafka.model.Student;
+//import com.tn.springboot.kafka.model.Student;
 
 @Service
 @Slf4j
 public class KafkaAvroListener {
 
-    @KafkaListener(topics = "${spring.kafka.topic.name}", groupId = "${spring.kafka.topic.consumer}")
+    /*@KafkaListener(topics = "${app.kafka.topic}", groupId = "${spring.kafka.consumer.group-id}")
     public void listen(ConsumerRecord<String, Student> record){
         log.info("Received Message:");
         log.info("Topic: {}", record.topic());
@@ -19,5 +19,5 @@ public class KafkaAvroListener {
         log.info("Offset: {}", record.offset());
         log.info("Key: {}", record.key());
         log.info("Value: {}", record.value());
-    }
+    }*/
 }
