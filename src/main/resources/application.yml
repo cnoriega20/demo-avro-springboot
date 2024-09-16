@@ -5,12 +5,12 @@ spring:
       group-id: student-group
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+      value-deserializer: com.tn.demoavro.s.serializer.AvroDeserializer
       properties:
         schema.registry.url: http://localhost:8081
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+      value-serializer: com.tn.demoavro.s.serializer.AvroSerializer
       properties:
         schema.registry.url: http://localhost:8081
 
@@ -23,3 +23,5 @@ avro:
 app:
   kafka:
     topic: student-topic
+server:
+  port: 9090
