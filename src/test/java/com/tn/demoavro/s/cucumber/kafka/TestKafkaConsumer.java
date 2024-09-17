@@ -23,7 +23,7 @@ public class TestKafkaConsumer {
 
     private final BlockingQueue<ConsumerRecord<String, AvroStudent>> consumerRecords = new LinkedBlockingQueue<>();
 
-    @KafkaListener(topics = "#{testKafkaConsumer.topic}", groupId = "#{testKafkaConsumer.groupId}")
+    @KafkaListener(topics = "${app.kafka.topic}", groupId = "${spring.kafka.consumer.group-id}")
     public void consume(ConsumerRecord<String, AvroStudent> record,
                         @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) {
         consumerRecords.add(record);
