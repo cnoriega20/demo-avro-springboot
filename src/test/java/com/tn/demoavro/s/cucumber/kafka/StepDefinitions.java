@@ -48,6 +48,12 @@ public class StepDefinitions {
         testKafkaProducer.sendStudentMessage(pojoStudent); // Mapping happens inside TestKafkaProducer
     }
 
+    @When("the student is consumed from the Kafka topic")
+    public void the_student_is_consumed_from_the_kafka_topic() throws InterruptedException {
+        // Consume the message from Kafka
+        avroStudent = testKafkaConsumer.consumeStudentMessage();
+    }
+
     @Then("the student name should be {string}")
     public void the_student_name_should_be(String studentName) throws InterruptedException {
         // Consume the message from Kafka

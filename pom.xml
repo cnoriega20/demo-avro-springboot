@@ -58,6 +58,11 @@
 			<artifactId>spring-kafka-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>io.confluent</groupId>
+			<artifactId>kafka-avro-serializer</artifactId>
+			<version>7.7.1</version>
+		</dependency>
         <dependency>
             <groupId>jakarta.xml.bind</groupId>
             <artifactId>jakarta.xml.bind-api</artifactId>
@@ -164,6 +169,10 @@
 			<id>maven_central</id>
 			<name>Maven Central</name>
 			<url>https://repo.maven.apache.org/maven2/</url>
+		</repository>
+		<repository>
+			<id>confluent</id>
+			<url>https://packages.confluent.io/maven/</url>
 		</repository>
 	</repositories>
 	<!--<repositories>
