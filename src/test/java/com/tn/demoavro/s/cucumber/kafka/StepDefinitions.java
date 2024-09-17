@@ -8,15 +8,13 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@Component
+
 public class StepDefinitions {
     @Autowired
     private TestKafkaProducer testKafkaProducer;

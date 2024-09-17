@@ -5,6 +5,10 @@ import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "src/test/resources/cucumber", glue = "com.tn.demoavro.s.cucumber")
+@CucumberOptions(features = "src/test/resources/cucumber",
+                glue = {
+                        "com.tn.demoavro.s.cucumber.kafka",
+                        "com.tn.demoavro.s.cucumber.configuration"
+                })
 public class CucumberTest {
 }
