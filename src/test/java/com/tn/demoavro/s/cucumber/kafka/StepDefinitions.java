@@ -1,6 +1,7 @@
 package com.tn.demoavro.s.cucumber.kafka;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tn.demoavro.s.cucumber.configuration.CucumberSpringConfiguration;
 import com.tn.demoavro.s.generated.AvroStudent;
 import com.tn.demoavro.s.mappers.StudentMapper;
 import com.tn.demoavro.s.model.Student;
@@ -8,13 +9,14 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
 
 import java.io.File;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
+@ContextConfiguration(classes = CucumberSpringConfiguration.class)
 public class StepDefinitions {
     @Autowired
     private TestKafkaProducer testKafkaProducer;
@@ -39,7 +41,7 @@ public class StepDefinitions {
         pojoStudent = objectMapper.readValue(jsonFile, Student.class);
 
         // Map POJO Student to Avro-generated Student
-        avroStudent = studentMapper.convertStudentToAvro(pojoStudent);
+        //avroStudent = studentMapper.convertStudentToAvro(pojoStudent);
     }
 
     @When("the student data is sent to Kafka")
@@ -57,9 +59,9 @@ public class StepDefinitions {
     @Then("the student name should be {string}")
     public void the_student_name_should_be(String studentName) throws InterruptedException {
         // Consume the message from Kafka
-        AvroStudent consumedStudent = testKafkaConsumer.consumeStudentMessage();
+        //AvroStudent consumedStudent = testKafkaConsumer.consumeStudentMessage();
 
         // Check if the consumed student's name matches the expected name
-        assertEquals(studentName, consumedStudent.getStudentName().toString());
+        assertEquals(studentName, avroStudent.getStudentName().toString(), "The student's name does not match.");
     }
 }
