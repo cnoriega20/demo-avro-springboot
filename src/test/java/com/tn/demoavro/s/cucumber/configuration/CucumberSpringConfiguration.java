@@ -7,7 +7,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 @CucumberContextConfiguration
 @SpringBootTest
-@EmbeddedKafka(partitions = 1, topics={"student-topic"})
+@EmbeddedKafka(partitions = 1, topics = {"${app.kafka.topic}"})
 @ActiveProfiles("test")
 public class CucumberSpringConfiguration {
 }

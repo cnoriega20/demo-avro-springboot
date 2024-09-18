@@ -10,5 +10,5 @@ import org.junit.runner.RunWith;
                         "com.tn.demoavro.s.cucumber.kafka",
                         "com.tn.demoavro.s.cucumber.configuration"
                 })
-public class CucumberTest {
+public class CucumberTestRunner {
 }
