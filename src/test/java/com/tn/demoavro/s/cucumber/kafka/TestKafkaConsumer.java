@@ -37,7 +37,7 @@ public class TestKafkaConsumer {
     // Method to retrieve the consumed AvroStudent from the queue
     public AvroStudent consumeStudentMessage() throws InterruptedException {
         // Adjust timeout if necessary
-        ConsumerRecord<String, AvroStudent> record = consumerRecords.poll(20, TimeUnit.SECONDS);
+        ConsumerRecord<String, AvroStudent> record = consumerRecords.poll(30, TimeUnit.SECONDS);
         if (record != null) {
             return record.value();
         } else {

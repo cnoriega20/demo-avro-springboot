@@ -41,7 +41,7 @@ public class StepDefinitions {
         pojoStudent = objectMapper.readValue(jsonFile, Student.class);
 
         // Map POJO Student to Avro-generated Student
-        //avroStudent = studentMapper.convertStudentToAvro(pojoStudent);
+        avroStudent = studentMapper.convertStudentToAvro(pojoStudent);
     }
 
     @When("the student data is sent to Kafka")
