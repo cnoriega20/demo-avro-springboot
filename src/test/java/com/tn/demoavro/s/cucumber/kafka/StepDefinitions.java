@@ -40,8 +40,6 @@ public class StepDefinitions {
         // Deserialize JSON into POJO Student object
         pojoStudent = objectMapper.readValue(jsonFile, Student.class);
 
-        // Map POJO Student to Avro-generated Student
-        avroStudent = studentMapper.convertStudentToAvro(pojoStudent);
     }
 
     @When("the student data is sent to Kafka")
@@ -58,8 +56,6 @@ public class StepDefinitions {
 
     @Then("the student name should be {string}")
     public void the_student_name_should_be(String studentName) throws InterruptedException {
-        // Consume the message from Kafka
-        //AvroStudent consumedStudent = testKafkaConsumer.consumeStudentMessage();
 
         // Check if the consumed student's name matches the expected name
         assertEquals(studentName, avroStudent.getStudentName().toString(), "The student's name does not match.");
